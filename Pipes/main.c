@@ -21,16 +21,16 @@ int main()
 
   if (pipe(fd) == -1) 
   {
-	  perror("Creating pipe");
-	  exit(EXIT_FAILURE);
+    perror("Creating pipe");
+    exit(EXIT_FAILURE);
   }
 
   switch(pid = fork()) 
   {
     case 0:
-	  // The child process will execute wc.
-	  // Close the pipe write descriptor.
-	  close(fd[WRITE]);
+    // The child process will execute wc.
+    // Close the pipe write descriptor.
+    close(fd[WRITE]);
     read(fd[0], buf, 4);
     if(atoi(buf) <= 500)
     {
@@ -48,9 +48,9 @@ int main()
 	  exit(EXIT_FAILURE);
 
     default:
-	  // The parent process will execute ls.
-	  // Close the pipe read descriptor.
-	  close(fd[READ]);
+    // The parent process will execute ls.
+    // Close the pipe read descriptor.
+    close(fd[READ]);
     sprintf(buf, "%d", numRandom);
     write(fd[1],buf,4);
     close(fd[1]);
